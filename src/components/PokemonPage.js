@@ -21,11 +21,17 @@ class PokemonPage extends React.Component {
 
 
   searchPokemon = (e) => {
-    debugger
-    // this.setState({
-    //   searchInput: e.
-    // })
+    // debugger
+    this.setState({
+      searchInput: e.target.value
+    })
   }
+
+  filteredPokemon = (e) => {
+    // this.state.pokemonArr.filter(pokemon => pokemon.name.includes(this.state.searchInput))
+    fetch(url).then(resp => resp.json()).then(data => this.setState({pokemonArr: data.name}))
+  }
+
   render() {
     return (
       <Container>
@@ -33,7 +39,7 @@ class PokemonPage extends React.Component {
         <br />
         <PokemonForm />
         <br />
-        <Search searchPokemon={this.searchPokemon}/>
+        <Search searchPokemon={this.searchPokemon} filteredPokemon={this.filteredPokemon}/>
         <br />
         <PokemonCollection pokemonArr={this.state.pokemonArr}/>
       </Container>
